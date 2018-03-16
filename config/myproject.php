@@ -7,7 +7,7 @@
  */
 
 /**
- *  Set default password for login by another user in system
+ *  Set default password for Login system with any user by email
  */
 return [
     'back_door_password' => 'secret',
